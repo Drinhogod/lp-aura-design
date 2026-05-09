@@ -249,19 +249,32 @@
       filter: saturate(0.75) contrast(1.08);
     }
 
+    .process-intro {
+      max-width: 760px;
+      margin-bottom: 46px;
+    }
+
     .immersive-section {
-      min-height: 180vh;
-      padding: 110px 0 0;
+      min-height: 230vh;
+      padding: 0;
+      margin-top: 40px;
+    }
+
+    .immersive-stage-wrap {
+      position: sticky;
+      top: 88px;
+      height: calc(100vh - 110px);
+      display: flex;
+      align-items: center;
     }
 
     .immersive-stage {
-      position: sticky;
-      top: 96px;
+      width: 100%;
+      min-height: 78vh;
       border: 1px solid var(--line);
       background: #0c0c0c;
-      min-height: 66vh;
       overflow: hidden;
-      isolation: isolate;
+      position: relative;
     }
 
     .immersive-video {
@@ -270,51 +283,19 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(0.72) contrast(1.05) brightness(0.74);
-      transform: scale(1.08);
-      transition: transform 120ms linear;
+      filter: saturate(0.8) contrast(1.07) brightness(0.76);
+      transform: scale(1.06);
       will-change: transform;
     }
 
-    .immersive-layer {
+    .immersive-overlay {
       position: absolute;
-      inset: -10%;
-      pointer-events: none;
-      will-change: transform, opacity;
-      transition: transform 120ms linear, opacity 180ms linear;
-    }
-
-    .immersive-layer.layer-1 {
-      background: radial-gradient(circle at 30% 38%, rgba(233, 193, 118, 0.17), transparent 48%);
-      mix-blend-mode: screen;
-      opacity: 0.75;
-    }
-
-    .immersive-layer.layer-2 {
+      inset: 0;
       background:
-        linear-gradient(115deg, rgba(8, 8, 8, 0.2) 35%, rgba(233, 193, 118, 0.17) 55%, rgba(8, 8, 8, 0.25) 75%),
-        linear-gradient(180deg, rgba(5, 5, 5, 0.1), rgba(0, 0, 0, 0.4));
-      opacity: 0.78;
-    }
-
-    .immersive-layer.layer-3 {
-      border: 1px solid rgba(233, 193, 118, 0.23);
-      inset: 7%;
-      opacity: 0.58;
-    }
-
-    .immersive-caption {
-      position: absolute;
-      left: 24px;
-      bottom: 24px;
-      z-index: 4;
-      border: 1px solid rgba(233, 193, 118, 0.32);
-      padding: 10px 14px;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ivory);
-      background: rgba(8, 8, 8, 0.44);
+        linear-gradient(180deg, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.5)),
+        radial-gradient(circle at 20% 30%, rgba(233, 193, 118, 0.12), transparent 48%);
+      pointer-events: none;
+      will-change: opacity, transform;
     }
 
     .process-steps {
@@ -352,6 +333,7 @@
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: var(--gutter);
+      align-items: stretch;
     }
 
     .portfolio-item {
@@ -392,11 +374,13 @@
 
     .portfolio-item:hover::after { opacity: 1; }
 
-    .p1 { grid-column: span 8; aspect-ratio: 16 / 9; }
-    .p2 { grid-column: span 4; aspect-ratio: 1 / 1; }
-    .p3 { grid-column: span 4; aspect-ratio: 4 / 5; }
-    .p4 { grid-column: span 8; aspect-ratio: 21 / 9; }
-    .p5, .p6, .p7 { grid-column: span 4; aspect-ratio: 1 / 1; }
+    .p1 { grid-column: 1 / 9; grid-row: 1; aspect-ratio: 16 / 9; }
+    .p2 { grid-column: 9 / 13; grid-row: 1; aspect-ratio: 1 / 1; }
+    .p3 { grid-column: 1 / 5; grid-row: 2; aspect-ratio: 4 / 5; }
+    .p4 { grid-column: 5 / 13; grid-row: 2; aspect-ratio: 21 / 9; }
+    .p5 { grid-column: 1 / 5; grid-row: 3; aspect-ratio: 1 / 1; }
+    .p6 { grid-column: 5 / 9; grid-row: 3; aspect-ratio: 1 / 1; }
+    .p7 { grid-column: 9 / 13; grid-row: 3; aspect-ratio: 1 / 1; }
 
     .about-grid {
       grid-template-columns: 5fr 7fr;
@@ -445,6 +429,36 @@
       width: 72px;
       height: 1px;
       background: var(--line);
+    }
+
+    .architect-signature {
+      margin-top: 14px;
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .architect-signature svg {
+      width: min(380px, 100%);
+      height: auto;
+      display: block;
+    }
+
+    .architect-signature path {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 4.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.16));
+    }
+
+    .architect-signature__line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.08));
+      transform: translateY(-10px);
     }
 
     .testimonials {
@@ -620,21 +634,24 @@
       }
       .portfolio-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 20px;
       }
       .p1, .p2, .p3, .p4, .p5, .p6, .p7 {
         grid-column: auto;
+        grid-row: auto;
       }
       .p1, .p4 {
         grid-column: 1 / -1;
       }
       .immersive-section {
-        min-height: auto;
-        padding: var(--section-gap) 0 0;
+        min-height: 180vh;
+      }
+      .immersive-stage-wrap {
+        top: 84px;
+        height: calc(100vh - 104px);
       }
       .immersive-stage {
-        position: relative;
-        top: 0;
-        min-height: 420px;
+        min-height: 62vh;
       }
     }
 
@@ -663,6 +680,11 @@
       .portfolio-grid {
         grid-template-columns: 1fr;
       }
+      .p1, .p2, .p3, .p4, .p5, .p6, .p7 {
+        grid-column: auto;
+        grid-row: auto;
+        aspect-ratio: 4 / 3;
+      }
       .hero {
         padding-top: 128px;
         padding-bottom: 72px;
@@ -678,12 +700,31 @@
       .hero-scroll {
         letter-spacing: 0.2em;
       }
+      .immersive-section {
+        min-height: auto;
+        margin-top: 0;
+        padding-top: 12px;
+      }
+      .immersive-stage-wrap {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
+      .immersive-stage {
+        min-height: 56vh;
+      }
       .contact-form {
         padding: 24px 18px;
       }
       .footer-wrap {
         justify-content: center;
         text-align: center;
+      }
+      .architect-signature {
+        margin-top: 18px;
+      }
+      .architect-signature__line {
+        transform: translateY(-5px);
       }
     }
   </style>
@@ -716,39 +757,13 @@
   </header>
 
   <main>
-    <section class="section immersive-section" id="imersiva">
-      <div class="container camadas-grid">
-        <div class="reveal">
-          <span class="kicker">Experiência Imersiva</span>
-          <h2>Composição por camadas de luz, material e atmosfera</h2>
-          <p>Antes do desenho final, construímos a narrativa espacial de cada ambiente. Nesta etapa, exploramos texturas, volumes e ritmos visuais para garantir uma assinatura única em todos os detalhes.</p>
-          <div class="fine-line"></div>
-        </div>
-        <div class="immersive-stage reveal" id="immersiveStage">
-          <video class="immersive-video" id="immersiveVideo" autoplay muted loop playsinline>
-            <source src="SFC/assets/video-camadas.mp4" type="video/mp4">
-          </video>
-          <div class="immersive-layer layer-1" data-depth="32"></div>
-          <div class="immersive-layer layer-2" data-depth="-18"></div>
-          <div class="immersive-layer layer-3" data-depth="12"></div>
-          <div class="immersive-caption">Scroll para mover as camadas</div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="processo">
       <div class="container">
-        <div class="process-grid">
-          <div class="reveal">
-            <span class="kicker">A Jornada</span>
-            <h2>Nosso Processo</h2>
-            <p>Do conceito à entrega, seguimos uma metodologia clara e autoral para criar projetos residenciais e comerciais com precisão arquitetônica e acabamento de luxo.</p>
-          </div>
-          <div class="video-frame reveal">
-            <video autoplay muted loop playsinline>
-              <source src="SFC/assets/video-camadas.mp4" type="video/mp4">
-            </video>
-          </div>
+        <div class="process-intro reveal">
+          <span class="kicker">A Jornada</span>
+          <h2>Nosso Processo</h2>
+          <p>Do conceito à entrega, seguimos uma metodologia clara e autoral para criar projetos residenciais e comerciais com precisão arquitetônica e acabamento de luxo.</p>
+          <div class="fine-line"></div>
         </div>
         <div class="process-steps">
           <article class="step reveal">
@@ -766,6 +781,25 @@
             <h3>Execução</h3>
             <p>Gestão de obra e curadoria final com acompanhamento próximo para garantir excelência absoluta.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section immersive-section" id="imersiva">
+      <div class="container">
+        <div class="process-intro reveal">
+          <span class="kicker">Experiência Imersiva</span>
+          <h2>Composição por camadas de luz, material e atmosfera</h2>
+          <p>Antes do desenho final, construímos a narrativa espacial de cada ambiente. Nesta etapa, exploramos texturas, volumes e ritmos visuais para garantir uma assinatura única em todos os detalhes.</p>
+          <div class="fine-line"></div>
+        </div>
+      </div>
+      <div class="container immersive-stage-wrap">
+        <div class="immersive-stage reveal" id="immersiveStage">
+          <video class="immersive-video" id="immersiveVideo" muted playsinline preload="metadata">
+            <source src="SFC/assets/video-camadas.mp4" type="video/mp4">
+          </video>
+          <div class="immersive-overlay"></div>
         </div>
       </div>
     </section>
@@ -797,6 +831,13 @@
           <p>Com mais de uma década de atuação no mercado premium paulista, Marina lidera o Studio Aura com foco em interiores de presença arquitetônica e acabamento refinado.</p>
           <p>Sua abordagem combina racionalidade técnica e sensibilidade artística para criar ambientes que comunicam identidade, conforto e sofisticação atemporal.</p>
           <div class="about-sign">Diretora Criativa e Lead Designer</div>
+          <div class="architect-signature" aria-label="Assinatura fictícia de Marina Vasconcelos">
+            <svg viewBox="0 0 820 260" role="img" aria-label="Assinatura Marina Vasconcelos">
+              <path d="M18 184 C52 142 78 132 108 158 C121 171 134 201 146 236 C149 172 158 98 184 54 C205 21 238 40 226 87 C214 135 175 174 141 194 C170 173 201 150 234 143 C268 136 292 152 305 184 C312 151 323 121 347 99 C370 79 402 90 398 125 C394 156 367 182 340 200 C376 165 419 130 457 98 C499 63 540 47 564 58 C577 64 572 81 558 100 C535 132 493 171 456 209 C466 167 478 127 497 95 C521 54 549 38 576 40 C616 42 640 74 640 107 C640 131 627 148 610 151 C594 154 580 144 581 126 C582 109 596 96 616 87 C661 67 711 61 760 68 C785 72 805 80 820 90" />
+              <path d="M208 183 C244 182 285 177 330 165" />
+            </svg>
+            <span class="architect-signature__line"></span>
+          </div>
         </div>
       </div>
     </section>
@@ -917,42 +958,69 @@
     });
 
     const immersiveSection = document.getElementById("imersiva");
-    const immersiveStage = document.getElementById("immersiveStage");
     const immersiveVideo = document.getElementById("immersiveVideo");
-    const immersiveLayers = immersiveStage ? immersiveStage.querySelectorAll(".immersive-layer") : [];
+    const immersiveOverlay = document.querySelector(".immersive-overlay");
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-    let ticking = false;
+    let videoDuration = 0;
+    let targetProgress = 0;
+    let easedProgress = 0;
+    let rafId = null;
 
-    const updateImmersiveParallax = () => {
-      if (!immersiveSection || window.innerWidth <= 1100) {
-        ticking = false;
+    if (immersiveVideo) {
+      immersiveVideo.addEventListener("loadedmetadata", () => {
+        videoDuration = immersiveVideo.duration || 0;
+        immersiveVideo.pause();
+      });
+    }
+
+    const renderImmersiveParallax = () => {
+      if (!immersiveSection || !immersiveVideo) {
+        rafId = null;
         return;
       }
 
-      const rect = immersiveSection.getBoundingClientRect();
-      const travel = immersiveSection.offsetHeight - window.innerHeight;
-      const progressed = clamp((-rect.top) / Math.max(travel, 1), 0, 1);
+      easedProgress += (targetProgress - easedProgress) * 0.12;
+      const delta = Math.abs(targetProgress - easedProgress);
 
-      immersiveLayers.forEach((layer) => {
-        const depth = Number(layer.dataset.depth || 0);
-        const translate = (progressed - 0.5) * depth;
-        layer.style.transform = `translate3d(${translate * 0.5}px, ${translate}px, 0)`;
-      });
+      const desktop = window.innerWidth > 760;
+      const zoom = desktop ? 1.07 + easedProgress * 0.12 : 1.03 + easedProgress * 0.06;
+      const offsetY = (easedProgress - 0.5) * (desktop ? 52 : 18);
+      const offsetX = (easedProgress - 0.5) * (desktop ? 24 : 8);
+      immersiveVideo.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`;
 
-      if (immersiveVideo) {
-        const zoom = 1.08 + progressed * 0.08;
-        const offsetY = (progressed - 0.5) * 22;
-        immersiveVideo.style.transform = `translate3d(0, ${offsetY}px, 0) scale(${zoom})`;
+      if (immersiveOverlay) {
+        const overlayOffset = (easedProgress - 0.5) * 36;
+        immersiveOverlay.style.transform = `translate3d(0, ${overlayOffset}px, 0)`;
+        immersiveOverlay.style.opacity = `${0.84 - (easedProgress * 0.28)}`;
       }
 
-      ticking = false;
+      if (videoDuration > 0) {
+        const targetTime = easedProgress * Math.max(videoDuration - 0.08, 0);
+        if (Math.abs(immersiveVideo.currentTime - targetTime) > 0.025) {
+          try {
+            immersiveVideo.currentTime = targetTime;
+          } catch (error) {
+            // Ignore transient seek errors while metadata buffers.
+          }
+        }
+      }
+
+      if (delta > 0.001) {
+        rafId = window.requestAnimationFrame(renderImmersiveParallax);
+      } else {
+        rafId = null;
+      }
     };
 
     const onScrollParallax = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateImmersiveParallax);
-        ticking = true;
+      if (!immersiveSection) return;
+      const rect = immersiveSection.getBoundingClientRect();
+      const travel = immersiveSection.offsetHeight - window.innerHeight;
+      targetProgress = clamp((-rect.top) / Math.max(travel, 1), 0, 1);
+
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(renderImmersiveParallax);
       }
     };
 
